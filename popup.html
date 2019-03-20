@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Empowering yourself...</title>
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Srisakdi" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="popup.css">
+    </head>
+    <body>
+        <div class="title">
+            <h4>Wake up & be awesome :)</h4>
+            <div class="onOrOff my-2">
+                <button type="button" id="alertOff" class="btn btn-outline-danger btn-sm">Off</button>
+                <button type="button" id="alertOn" class="btn btn-outline-success btn-sm">On</button>
+            </div>
+        </div>
+
+        <form>
+            <div class="quoteList mt-2">
+                <p id="quoteListArea"></p>
+                <h5 id="hash">.............</h5>
+            </div>
+
+            <div class="body mt-2">
+                <textarea type="text" id="textField" class="form-control text-center" placeholder="What have you promised?"></textarea>
+                <button id="clearMessage" class="btn btn-secondary btn-sm mr-4 mt-2">Clear</button>
+                <button id="submitMessage" type="submit" class="btn btn-primary btn-sm mt-2">Submit</button>
+            </div>
+        </form>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="popup.js"></script>
+    </body>
+</html>

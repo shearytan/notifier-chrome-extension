@@ -1,0 +1,44 @@
+body {
+    text-align: center;
+    color: #ffffff;
+    background: #125e4c;
+    padding: 10px;
+    width: 400px;
+    font-size: 15px;
+    font-family: Playfair Display;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    text-shadow: 0 2px 5px #000000;
+}
+
+.quoteList {
+    display: flex;
+    flex-direction: column;
+    color: #000000;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background: lightblue url("paper.jpg") no-repeat fixed center;
+    background-size: cover;
+    border-left: 6px double rgb(0, 128, 0);
+    border-right: 6px double rgb(0, 128, 0);
+    box-shadow: 2px 2px 6px #000000;
+    font-weight: 1000;
+    font-family: Srisakdi;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+#hash {
+    margin-top: 5px;
+}
+
+.onOrOff {
+    float: right;
+    border: 4px double #fffefeef;
+    padding: 5px;
+}

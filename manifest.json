@@ -1,0 +1,15 @@
+{
+    "name": "You said this!",
+    "description": "Reminding user about the inspiration quotes they said before and empowering them",
+    "version": "1.0",
+    "manifest_version": 2,
+    "permissions": ["alarms", "notifications", "storage"],
+    "background":{
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "browser_action": {
+        "default_title": "Be Awesome",
+        "default_popup": "popup.html"
+    }
+}
