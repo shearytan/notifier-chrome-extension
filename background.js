@@ -14,3 +14,9 @@ chrome.alarms.onAlarm.addListener(function() {
     })
     
 });
+
+chrome.webNavigation.onCompleted.addListener(function(val) {
+    if (val.url && val.url.match(/www\.google\.com/)) {
+        console.log("This is the google chrome: ", val)
+    }
+})

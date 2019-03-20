@@ -3,7 +3,7 @@
     "description": "Reminding user about the inspiration quotes they said before and empowering them",
     "version": "1.0",
     "manifest_version": 2,
-    "permissions": ["alarms", "notifications", "storage"],
+    "permissions": ["alarms", "notifications", "storage", "webNavigation"],
     "background":{
         "scripts": ["background.js"],
         "persistent": false

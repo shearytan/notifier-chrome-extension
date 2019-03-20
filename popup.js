@@ -12,10 +12,6 @@ chrome.storage.sync.get("message", function(val) {
 /**
  * Alert section
  */
-function setTimer(fn, date) {
-    let now = new Date().getTime();
-    console.log(now);
-}
 
 function setAlert () {
     chrome.browserAction.setBadgeText({text: 'ON'});
