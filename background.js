@@ -1,5 +1,5 @@
-chrome.webNavigation.onCompleted.addListener(function(val) {
-    if (val.url && val.url.match(/www\.google\.com/)) {
+chrome.alarms.onAlarm.addListener(function(val) {
+    if(val.name === 'turnOnAlert') {
         chrome.browserAction.setBadgeText({text: ''});
         chrome.storage.sync.get("message", function(val) {
             chrome.notifications.create({

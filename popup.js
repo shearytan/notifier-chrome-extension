@@ -13,11 +13,17 @@ chrome.storage.sync.get("message", function(val) {
  * Alert section
  */
 
-function setAlert () {
+ function setAlert() {
+    let now = new Date();
+    let day = now.getDate();
+    let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 12, 0, 0, 0);
+     
     chrome.browserAction.setBadgeText({text: 'ON'});
     chrome.browserAction.setBadgeBackgroundColor({color: '#125e4c'});
-    chrome.alarms.create({delayInMinutes: 0.1})
-}
+    chrome.alarms.create('turnOnAlert', {
+        when: timestamp
+    });
+ }
 
 function clearAlert () {
     // set the text on the badge to nothing
