@@ -1,6 +1,6 @@
 {
-    "name": "You said this!",
-    "description": "Reminding user about the inspiration quotes they said before and empowering them",
+    "name": "Goal Reminder",
+    "description": "Reminding the user about the inspiration things they said before and empowering them",
     "version": "1.0",
     "manifest_version": 2,
     "permissions": ["alarms", "notifications", "storage", "webNavigation"],

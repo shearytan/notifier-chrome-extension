@@ -17,7 +17,7 @@ chrome.storage.sync.get("message", function(val) {
     // When alert has been turned on
     let now = new Date();
     let day = now.getDate();
-    let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 14, 40, 0, 0);
+    let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 12, 0, 0, 0);
      
     chrome.browserAction.setBadgeText({text: 'ON'});
     chrome.browserAction.setBadgeBackgroundColor({color: '#125e4c'});

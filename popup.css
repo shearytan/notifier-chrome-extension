@@ -1,18 +1,14 @@
 body {
     text-align: center;
     color: #ffffff;
-    background: #125e4c;
+    background: #236959;
     padding: 10px;
     width: 400px;
-    font-size: 15px;
-    font-family: Playfair Display;
+    font-family: Assistant;
 }
 
-.title {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px auto;
-    text-shadow: 0 2px 5px #000000;
+h4 {
+    font-size: 40px;
 }
 
 .quoteList {
@@ -26,8 +22,7 @@ body {
     background-size: cover;
     border-left: 6px double rgb(0, 128, 0);
     border-right: 6px double rgb(0, 128, 0);
-    box-shadow: 2px 2px 6px #000000;
-    font-weight: 1000;
+    box-shadow: 2px 2px 6px #000000; 
     font-family: Srisakdi;
     overflow: hidden;
     overflow-wrap: break-word;
@@ -39,7 +34,14 @@ body {
 
 .onOrOff {
     float: right;
-    border: 4px double #fffefeef;
     padding: 5px;
-    display: block;
+    position: relative;
+    text-indent: 30;
+}
+
+.fa-power-off {
+    position: absolute;
+    top: 20px;
+  left: 7px;
+  font-size: 15px;
 }
