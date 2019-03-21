@@ -1,3 +1,15 @@
+chrome.runtime.onInstalled.addListener(function() {
+    // let currentButton = document.getElementById("onOff");
+
+    // chrome.browserAction.setBadgeText({text: ''});
+    // chrome.storage.sync.set({'buttonValue': 'OFF'});
+    // chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-danger btn-sm'})
+
+    // currentButton.value = "OFF";
+    // currentButton.className = "btn btn-outline-danger btn-sm";
+    alert("This is the event")
+});
+
 chrome.storage.sync.get("message", function(val) {
     // Check if there 'message' in the user's local storage
     if(!val.message) {
