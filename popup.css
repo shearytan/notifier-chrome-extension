@@ -41,4 +41,5 @@ body {
     float: right;
     border: 4px double #fffefeef;
     padding: 5px;
+    display: block;
 }
