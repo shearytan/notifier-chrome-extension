@@ -1,6 +1,6 @@
 chrome.storage.sync.get("message", function(val) {
     // Check if there 'message' in the user's local storage
-    if(val.message === undefined) {
+    if(!val.message) {
         // Not found: implement this message to the 'message'
         chrome.storage.sync.set({'message': "Let's write something to remind yourself tomorrow..."});
     } else {
@@ -16,10 +16,12 @@ chrome.storage.sync.get("message", function(val) {
  function setAlert() {
     let now = new Date();
     let day = now.getDate();
-    let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 9, 0, 0, 0);
+    let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 14, 40, 0, 0);
      
     chrome.browserAction.setBadgeText({text: 'ON'});
     chrome.browserAction.setBadgeBackgroundColor({color: '#125e4c'});
+    chrome.storage.sync.set({'buttonValue': 'ON'});
+    chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-success btn-sm'})
     chrome.alarms.create('turnOnAlert', {
         when: timestamp
     });
@@ -28,6 +30,8 @@ chrome.storage.sync.get("message", function(val) {
 function clearAlert () {
     // set the text on the badge to nothing
     chrome.browserAction.setBadgeText({text: ''});
+    chrome.storage.sync.set({'buttonValue': 'OFF'});
+    chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-danger btn-sm'})
     // clear the alarm
     chrome.alarms.clearAll();
     window.close();
@@ -65,30 +69,24 @@ window.addEventListener('keypress', function(e) {
  *  On and off button visibility
  */
 function on_and_off_button_visibility(id) {
-    let currentValue = document.getElementById("onOff").value;
-
-    if(currentValue == 'Off') {
-        document.getElementById('onOff').value = "On";
-        // setAlert();
-        let now = new Date();
-        let day = now.getDate();
-        let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 9, 0, 0, 0);
-        
-        chrome.browserAction.setBadgeText({text: 'ON'});
-        chrome.browserAction.setBadgeBackgroundColor({color: '#125e4c'});
-        chrome.alarms.create('turnOnAlert', {
-            when: timestamp
-        });
-    } else {
-        document.getElementById('onOff').value = "Off";
-        clearAlert();
-    }
+    let currentButton = document.getElementById("onOff");
+    // clearAlert();
+    chrome.storage.sync.get(['buttonValue', 'buttonClassName'], function(val) {
+        if(currentButton.value == 'OFF') {
+            setAlert();
+            currentButton.value = val.buttonValue;
+            currentButton.className = val.buttonClassName;
+        } else {
+            clearAlert();
+            currentButton.value = val.buttonValue;
+            currentButton.className = val.buttonClassName;
+        }
+    })
 }
 
 /**
  *  Document selectors
  */
-document.getElementById('onOff').addEventListener('click', on_and_off_button_visibility);
-// document.getElementById('alertOff').addEventListener('click', on_and_off_button_visibility);
-document.getElementById('submitMessage').addEventListener('click', formSubmit);
-document.getElementById('clearMessage').addEventListener('click', formClear);
+document.getElementById('onOff').addEventListener('click', on_and_off_button_visibility); // On and Off button
+document.getElementById('submitMessage').addEventListener('click', formSubmit); // Submit button
+document.getElementById('clearMessage').addEventListener('click', formClear); // Clear button
