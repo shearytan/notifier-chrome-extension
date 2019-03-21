@@ -65,13 +65,30 @@ window.addEventListener('keypress', function(e) {
  *  On and off button visibility
  */
 function on_and_off_button_visibility(id) {
-    
+    let currentValue = document.getElementById("onOff").value;
+
+    if(currentValue == 'Off') {
+        document.getElementById('onOff').value = "On";
+        // setAlert();
+        let now = new Date();
+        let day = now.getDate();
+        let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 9, 0, 0, 0);
+        
+        chrome.browserAction.setBadgeText({text: 'ON'});
+        chrome.browserAction.setBadgeBackgroundColor({color: '#125e4c'});
+        chrome.alarms.create('turnOnAlert', {
+            when: timestamp
+        });
+    } else {
+        document.getElementById('onOff').value = "Off";
+        clearAlert();
+    }
 }
 
 /**
  *  Document selectors
  */
-document.getElementById('alertOn').addEventListener('click', setAlert);
-document.getElementById('alertOff').addEventListener('click', clearAlert);
+document.getElementById('onOff').addEventListener('click', on_and_off_button_visibility);
+// document.getElementById('alertOff').addEventListener('click', on_and_off_button_visibility);
 document.getElementById('submitMessage').addEventListener('click', formSubmit);
 document.getElementById('clearMessage').addEventListener('click', formClear);
