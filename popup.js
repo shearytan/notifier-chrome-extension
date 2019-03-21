@@ -1,20 +1,9 @@
-chrome.runtime.onInstalled.addListener(function() {
-    // let currentButton = document.getElementById("onOff");
-
-    // chrome.browserAction.setBadgeText({text: ''});
-    // chrome.storage.sync.set({'buttonValue': 'OFF'});
-    // chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-danger btn-sm'})
-
-    // currentButton.value = "OFF";
-    // currentButton.className = "btn btn-outline-danger btn-sm";
-    alert("This is the event")
-});
-
 chrome.storage.sync.get("message", function(val) {
     // Check if there 'message' in the user's local storage
     if(!val.message) {
         // Not found: implement this message to the 'message'
         chrome.storage.sync.set({'message': "Let's write something to remind yourself tomorrow..."});
+        chrome.storage.sync.get("message", function(val) {document.getElementById('quoteListArea').innerHTML = val.message;});
     } else {
         // Found: Use the previous message they type in
         chrome.storage.sync.get("message", function(val) {document.getElementById('quoteListArea').innerHTML = val.message;});
@@ -24,14 +13,15 @@ chrome.storage.sync.get("message", function(val) {
 /**
  * Alert section
  */
-
  function setAlert() {
+    // When alert has been turned on
     let now = new Date();
     let day = now.getDate();
     let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 14, 40, 0, 0);
      
     chrome.browserAction.setBadgeText({text: 'ON'});
     chrome.browserAction.setBadgeBackgroundColor({color: '#125e4c'});
+    // Get the stored value and change it from OFF to ON
     chrome.storage.sync.set({'buttonValue': 'ON'});
     chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-success btn-sm'})
     chrome.alarms.create('turnOnAlert', {
@@ -82,18 +72,19 @@ window.addEventListener('keypress', function(e) {
  */
 function on_and_off_button_visibility(id) {
     let currentButton = document.getElementById("onOff");
-    // clearAlert();
-    chrome.storage.sync.get(['buttonValue', 'buttonClassName'], function(val) {
-        if(currentButton.value == 'OFF') {
-            setAlert();
+    if(currentButton.value == 'OFF') {
+        setAlert();
+        chrome.storage.sync.get(['buttonValue', 'buttonClassName'], function(val) {
             currentButton.value = val.buttonValue;
             currentButton.className = val.buttonClassName;
-        } else {
-            clearAlert();
+        })
+    } else {
+        clearAlert();
+        chrome.storage.sync.get(['buttonValue', 'buttonClassName'], function(val) {
             currentButton.value = val.buttonValue;
             currentButton.className = val.buttonClassName;
-        }
-    })
+        })
+    }
 }
 
 /**
