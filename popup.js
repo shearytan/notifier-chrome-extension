@@ -10,6 +10,14 @@ chrome.storage.sync.get("message", function(val) {
     }
 })
 
+chrome.storage.sync.set({'buttonOn': '<input type="button" id="buttonOn" class="btn btn-outline-success btn-sm" value="ON" onclick="setAlert()">'});
+    chrome.storage.sync.set({'buttonOff': '<input type="button" id="buttonOff" class="btn btn-outline-danger btn-sm" value="OFF" onclick="clearAlert()">'});
+
+    chrome.storage.sync.get(['buttonOn', 'buttonOff'], function(val) {
+        document.getElementById('buttonContainerOn').innerHTML = val.buttonOn;
+        document.getElementById('buttonContainerOff').innerHTML = val.buttonOff;
+    })
+
 /**
  * Alert section
  */
@@ -17,23 +25,31 @@ chrome.storage.sync.get("message", function(val) {
     // When alert has been turned on
     let now = new Date();
     let day = now.getDate();
-    let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 12, 0, 0, 0);
+    let timestamp = +new Date(now.getFullYear(), now.getMonth(), day, 11, 39, 0, 0);
+
+    let currentButton = document.getElementById("buttonContainerOn");
+    // chrome.storage.sync.set({'buttonOn': '<input type="button" id="buttonOn" class="btn btn-outline-success active btn-sm" value="ON" onclick="seAlert()">'});
+    // chrome.storage.sync.set({'buttonOff': '<input type="button" id="buttonOff" class="btn btn-outline-danger btn-sm" value="OFF" onclick="clearAlert()">'})
      
     chrome.browserAction.setBadgeText({text: 'ON'});
     chrome.browserAction.setBadgeBackgroundColor({color: '#125e4c'});
     // Get the stored value and change it from OFF to ON
-    chrome.storage.sync.set({'buttonValue': 'ON'});
-    chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-success btn-sm'})
     chrome.alarms.create('turnOnAlert', {
         when: timestamp
     });
+    
  }
 
 function clearAlert () {
+    // let currentButton = document.getElementById("buttonOff");
+  
     // set the text on the badge to nothing
     chrome.browserAction.setBadgeText({text: ''});
-    chrome.storage.sync.set({'buttonValue': 'OFF'});
-    chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-danger btn-sm'})
+    // chrome.storage.sync.set({'buttonValue': 'OFF'});
+    // chrome.storage.sync.set({'buttonClassName': 'btn btn-outline-danger btn-sm'})
+
+    currentButton.value = "OFF";
+    currentButton.className = 'btn btn-outline-danger active btn-sm';
     // clear the alarm
     chrome.alarms.clearAll();
     window.close();
@@ -67,29 +83,16 @@ window.addEventListener('keypress', function(e) {
     chrome.storage.sync.set({'message': text});
 });
 
-/**
- *  On and off button visibility
- */
-function on_and_off_button_visibility(id) {
-    let currentButton = document.getElementById("onOff");
-    if(currentButton.value == 'OFF') {
-        setAlert();
-        chrome.storage.sync.get(['buttonValue', 'buttonClassName'], function(val) {
-            currentButton.value = val.buttonValue;
-            currentButton.className = val.buttonClassName;
-        })
-    } else {
-        clearAlert();
-        chrome.storage.sync.get(['buttonValue', 'buttonClassName'], function(val) {
-            currentButton.value = val.buttonValue;
-            currentButton.className = val.buttonClassName;
-        })
-    }
+function buttonActive() {
+    chrome.browserAction.getBadgeText({}, function(val) {
+        console.log(val)
+    })
 }
 
 /**
  *  Document selectors
  */
-document.getElementById('onOff').addEventListener('click', on_and_off_button_visibility); // On and Off button
+document.getElementById('buttonOn').addEventListener('click',  setAlert)
+document.getElementById('buttonOff').addEventListener('click', clearAlert); // On and Off button
 document.getElementById('submitMessage').addEventListener('click', formSubmit); // Submit button
 document.getElementById('clearMessage').addEventListener('click', formClear); // Clear button

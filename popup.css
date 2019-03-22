@@ -20,34 +20,38 @@ h4 {
     width: 100%;
     height: 100%;
     padding: 10px;
-    background: lightblue url("paper.jpg") no-repeat fixed center;
-    background-size: cover;
-    border-left: 6px double rgb(0, 128, 0);
-    border-right: 6px double rgb(0, 128, 0);
-    box-shadow: 2px 2px 6px #000000; 
+    /* background: lightblue url("paper.jpg") no-repeat fixed center;
+    background-size: cover; */
+    /* border-left: 6px double rgb(0, 128, 0);
+    border-right: 6px double rgb(0, 128, 0); */
+    /* box-shadow: 2px 2px 6px #000000;  */
     font-family: Srisakdi;
     overflow: hidden;
     overflow-wrap: break-word;
 }
 
-#hash {
-    margin-top: 5px;
+.bodyInput {
+    background: lightblue url("paper.jpg") no-repeat fixed center;
+    background-size: cover;
+    margin: 10px;
+    padding: 10px;
 }
 
 .onOrOff {
     padding: 20px;
     position: relative;
     text-indent: 30;
+    right: 0;
     background: #0f0c29;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 
 .fa-power-off {
     position: absolute;
     top: 20px;
-  left: 7px;
-  font-size: 15px;
-  float: right;
+    left: 7px;
+    font-size: 15px;
+    float: right;
 }
